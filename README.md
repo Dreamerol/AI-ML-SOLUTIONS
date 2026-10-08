@@ -8,7 +8,7 @@
 
 <h1 align="center"> 💻 𝗔𝗜 𝗦𝗧𝗨𝗗𝗜𝗢 — 𝗠𝗟 𝗦𝗢𝗟𝗨𝗧𝗜𝗢𝗡𝗦</h1>
 
-<h1 align="center">  ### *Machine Learning algorithms implemented from scratch.*
+<h2 align="center">  *Machine Learning algorithms implemented from scratch.*
 
 
 
