@@ -551,6 +551,14 @@ Understand the Model
 * [ ] Add mathematical explanations
 * [ ] Add datasets and experiments
 
+
+
+
+
+<br><br>
+
+
+
 ---
 
 <div align="center">
@@ -560,7 +568,7 @@ Understand the Model
 **Learn the math. Build the algorithm. Understand the model.**
 
 
-<br><br>
+
 
 
 
