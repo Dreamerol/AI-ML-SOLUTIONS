@@ -560,6 +560,11 @@ Understand the Model
 **Learn the math. Build the algorithm. Understand the model.**
 
 
+<br><br>
+
+
+
+
 </div>
 
 </div>
