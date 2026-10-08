@@ -635,7 +635,7 @@ model.predict(X_test)
 
 # 🧠 Concepts Covered
 
-<div align="center">
+<div align="left">
 
 | 📐 Mathematics     | 🤖 Machine Learning   | 🛠️ Tools    |
 | ------------------ | --------------------- | ------------ |
@@ -767,6 +767,11 @@ the goal is to understand **why the algorithms work**, not only how to call them
 * [ ] Model Performance Comparison
 * [ ] More Machine Learning Algorithms
 
+
+
+<br><br>
+
+
 ---
 
 <div align="center">
@@ -775,14 +780,8 @@ the goal is to understand **why the algorithms work**, not only how to call them
 
 **Machine Learning — one algorithm at a time. 🚀**
 
-</div>
 
-
-</div>
-</div>
-
-
-
+<br><br>
 
 
 </div>
