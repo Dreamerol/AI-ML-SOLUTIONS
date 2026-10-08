@@ -180,37 +180,24 @@ alt="Mihaela Koseva (Михаела Косева), Sofia University (Софий�
 
 
 
-
-
-
 <div align="left">
 
 <div align="left">
-
-
-
 
 <br><br>
 
+🤖 Machine Learning From Scratch
+Understanding Machine Learning by building the algorithms myself.
 
+Building ML algorithms from scratch to understand the math, logic, and intuition behind them — not just how to use a library.
 
-
-# 🤖 Machine Learning From Scratch
-
-### Understanding Machine Learning by building the algorithms myself.
-
-Building ML algorithms from scratch to understand the **math, logic, and intuition** behind them — not just how to use a library.
-
-
----
-
-## 🧠 About
+🧠 About
 
 <div align="left">
 
-This repository contains my implementations and experiments with fundamental **Machine Learning algorithms**.
+This repository contains my implementations and experiments with fundamental Machine Learning algorithms.
 
-The main goal is to understand how Machine Learning works **under the hood** by implementing the core ideas and mathematics behind different algorithms.
+The main goal is to understand how Machine Learning works under the hood by implementing the core ideas and mathematics behind different algorithms.
 
 </div>
 
@@ -218,78 +205,61 @@ The main goal is to understand how Machine Learning works **under the hood** by 
 
 Instead of treating models as black boxes and simply using:
 
-```python
 model.fit(X, y)
 model.predict(X_test)
-```
 
-I focus on understanding what happens behind the prediction — from **distances and probabilities** to **gradients, entropy, loss functions, and decision boundaries**.
+I focus on understanding what happens behind the prediction — from distances and probabilities to gradients, entropy, loss functions, and decision boundaries.
 
 </div>
 
----
+📚 Algorithms
 
-## 📚 Algorithms
-
-<table>
-<tr>
+<table> <tr>
 
 <td width="50%" valign="top">
 
-### 🔹 K-Nearest Neighbors
+🔹 K-Nearest Neighbors
 
-**Concepts**
+Concepts
 
-* Euclidean distance
-* Nearest neighbors
-* Majority voting
-* Classification
-
-```python
+Euclidean distance
+Nearest neighbors
+Majority voting
+Classification
 def euclidean_distance(a, b):
     return np.sqrt(
         sum((a[i] - b[i]) ** 2
             for i in range(len(a)))
     )
-```
-
-```python
 k_nearest = np.argsort(distances)[:k]
-labels = y_train[k_nearest]
+labels = [y_train[i] for i in k_nearest]
 
 prediction = Counter(
     labels
 ).most_common(1)[0][0]
-```
 
 </td>
 
 <td width="50%" valign="top">
 
-### 🌳 Decision Tree
+🌳 Decision Tree
 
-**Concepts**
+Concepts
 
-* Entropy
-* Information Gain
-* Recursive splitting
-* Decision nodes
-* Leaf nodes
-
-```python
+Entropy
+Information Gain
+Recursive splitting
+Decision nodes
+Leaf nodes
 information_gain = (
     entropy(parent)
     - left_weight * entropy(left)
     - right_weight * entropy(right)
 )
-```
-
-```python
 if feature_value <= threshold:
     go_left()
 else:
     go_right()
-```
 
 </td>
 
@@ -299,52 +269,38 @@ else:
 
 <td width="50%" valign="top">
 
-### 📈 Logistic Regression
+📈 Logistic Regression
 
-**Concepts**
+Concepts
 
-* Sigmoid function
-* Binary classification
-* Cross-entropy loss
-* Gradient descent
-
-```python
+Sigmoid function
+Binary classification
+Cross-entropy loss
+Gradient descent
 def sigmoid(z):
     return 1 / (1 + np.exp(-z))
-```
-
-```python
 prediction = 1 if probability >= 0.5 else 0
-```
 
-The model learns parameters by minimizing the **cost function** using gradient descent.
+The model learns parameters by minimizing the cost function using gradient descent.
 
 </td>
 
 <td width="50%" valign="top">
 
-### 🎲 Naive Bayes
+🎲 Naive Bayes
 
-**Concepts**
+Concepts
 
-* Prior probability
-* Likelihood
-* Posterior probability
-* Gaussian distribution
-
-```python
-posterior = (
-    likelihood * prior
-)
-```
-
-```python
+Prior probability
+Likelihood
+Posterior probability
+Gaussian distribution
+posterior = likelihood * prior
 prediction = classes[
     np.argmax(posteriors)
 ]
-```
 
-The implementation uses **Gaussian likelihoods** for continuous features.
+The implementation uses Gaussian likelihoods for continuous features.
 
 </td>
 
@@ -354,24 +310,21 @@ The implementation uses **Gaussian likelihoods** for continuous features.
 
 <td width="50%" valign="top">
 
-### 📊 Linear Regression
+📊 Linear Regression
 
-**Concepts**
+Concepts
 
-* Simple regression
-* Multiple regression
-* Coefficients
-* Intercept
-* Prediction
-* R² score
-
-```python
+Simple regression
+Multiple regression
+Coefficients
+Intercept
+Prediction
+R² score
 model = LinearRegression()
 
-model.fit(X, y)
+model.fit(X_train, y_train)
 
-predictions = model.predict(X)
-```
+predictions = model.predict(X_test)
 
 The goal is to find a line that best represents the relationship between the input features and the target.
 
@@ -379,29 +332,26 @@ The goal is to find a line that best represents the relationship between the inp
 
 <td width="50%" valign="top">
 
-### 🧮 Polynomial Regression
 
-**Concepts**
 
-* Polynomial features
-* Non-linear relationships
-* Feature transformation
-* Degree
 
-```python
+🧮 Polynomial Regression
+
+Concepts
+
+Polynomial features
+Non-linear relationships
+Feature transformation
+Degree
 poly = PolynomialFeatures(
     degree=2
 )
 
 X_poly = poly.fit_transform(X)
-```
-
-```python
 model = LinearRegression()
 model.fit(X_poly, y)
-```
 
-Polynomial regression allows linear regression to model **non-linear patterns**.
+Polynomial regression allows linear regression to model non-linear patterns.
 
 </td>
 
@@ -411,33 +361,29 @@ Polynomial regression allows linear regression to model **non-linear patterns**.
 
 <td width="50%" valign="top">
 
-### ⚡ Support Vector Machine
+⚡ Support Vector Machine
 
-**Concepts**
+Concepts
 
-* Maximum margin
-* Support vectors
-* Hinge loss
-* L2 regularization
-* Gradient descent
-
-```python
+Maximum margin
+Support vectors
+Hinge loss
+L2 regularization
+Gradient descent
 condition = (
     y * np.dot(x, w) - b >= 1
 )
-```
 
-The objective is to find a decision boundary with the **largest possible margin** between classes.
+The objective is to find a decision boundary with the largest possible margin between classes.
 
 </td>
 
 <td width="50%" valign="top">
 
-### 🔄 Machine Learning Workflow
+🔄 Machine Learning Workflow
 
 Most implementations follow the same basic pipeline:
 
-```text
 Dataset
    ↓
 Features & Target
@@ -449,59 +395,45 @@ Training
 Prediction
    ↓
 Evaluation
-```
 
 This project focuses on understanding every step of this process.
 
 </td>
 
-</tr>
-</table>
+</tr> </table>
 
----
 
-## 🎯 Classification vs Regression
 
-| Type              | Goal                       | Algorithms                                                |
-| ----------------- | -------------------------- | --------------------------------------------------------- |
-| 🟢 Classification | Predict a class            | KNN, Decision Tree, Logistic Regression, Naive Bayes, SVM |
-| 🔵 Regression     | Predict a continuous value | Linear Regression, Polynomial Regression                  |
 
----
-
-## 🧩 Core Concepts
-
-| Concept                   | Purpose                               |
-| ------------------------- | ------------------------------------- |
-| 📏 Euclidean Distance     | Measures distance between data points |
-| 🌳 Entropy                | Measures impurity in a dataset        |
-| 📈 Information Gain       | Determines the best tree split        |
-| 🔢 Sigmoid                | Converts values into probabilities    |
-| 🎲 Bayes Theorem          | Calculates posterior probabilities    |
-| 📉 Gradient Descent       | Optimizes model parameters            |
-| ⚖️ Regularization         | Helps reduce overfitting              |
-| 📐 Margin                 | Determines the SVM decision boundary  |
-| 🔄 Feature Transformation | Creates polynomial features           |
-
----
-
-## 🛠️ Tech Stack
+🎯 Classification vs Regression
+Type	Goal	Algorithms
+🟢 Classification	Predict a class	KNN, Decision Tree, Logistic Regression, Naive Bayes, SVM
+🔵 Regression	Predict a continuous value	Linear Regression, Polynomial Regression
+🧩 Core Concepts
+Concept	Purpose
+📏 Euclidean Distance	Measures distance between data points
+🌳 Entropy	Measures impurity in a dataset
+📈 Information Gain	Determines the best tree split
+🔢 Sigmoid	Converts values into probabilities
+🎲 Bayes Theorem	Calculates posterior probabilities
+📉 Gradient Descent	Optimizes model parameters
+⚖️ Regularization	Helps reduce overfitting
+📐 Margin	Determines the SVM decision boundary
+🔄 Feature Transformation	Creates polynomial features
+🛠️ Tech Stack
 
 <div align="center">
 
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge\&logo=python\&logoColor=white)
-![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge\&logo=numpy\&logoColor=white)
-![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge\&logo=pandas\&logoColor=white)
-![Scikit Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=for-the-badge\&logo=scikit-learn\&logoColor=white)
-![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge\&logo=plotly\&logoColor=white)
+
+
+
+<br><br>
+
+
 
 </div>
 
----
-
-## 📁 Project Structure
-
-```text
+📁 Project Structure
 machine-learning/
 │
 ├── data/
@@ -516,17 +448,18 @@ machine-learning/
 ├── svm.py
 │
 └── README.md
-```
 
----
 
-## 🚀 Why This Project?
+<br><br>
+
+
+
+🚀 Why This Project?
 
 Machine Learning becomes much easier to understand when you stop treating algorithms as black boxes.
 
-This project is about learning **how and why** the algorithms work.
+This project is about learning how and why the algorithms work.
 
-```text
 Understand the Math
         ↓
 Understand the Algorithm
@@ -536,22 +469,23 @@ Implement It
 Test It
         ↓
 Understand the Model
-```
+🔮 Future Improvements
 
----
+Add model evaluation metrics
 
-## 🔮 Future Improvements
+Add confusion matrices
 
-* [ ] Add model evaluation metrics
-* [ ] Add confusion matrices
-* [ ] Visualize decision boundaries
-* [ ] Add more algorithms
-* [ ] Improve implementations and documentation
-* [ ] Compare from-scratch implementations with Scikit-learn
-* [ ] Add mathematical explanations
-* [ ] Add datasets and experiments
+Visualize decision boundaries
 
+Add more algorithms
 
+Improve implementations and documentation
+
+Compare from-scratch implementations with Scikit-learn
+
+Add mathematical explanations
+
+Add datasets and experiments
 
 
 
@@ -559,16 +493,11 @@ Understand the Model
 
 
 
----
-
 <div align="center">
 
-### 🧠 Don't just use Machine Learning. Understand it.
+🧠 Don't just use Machine Learning. Understand it.
 
-**Learn the math. Build the algorithm. Understand the model.**
-
-
-
+Learn the math. Build the algorithm. Understand the model.
 
 
 
@@ -578,8 +507,6 @@ Understand the Model
 </div>
 
 </div>
-
-
 
 
 ---
@@ -749,8 +676,6 @@ alt="Mihaela Koseva (Михаела Косева), Sofia University (Софий�
 
 
 <br><br><br>
-
-
 
 
 
