@@ -186,80 +186,139 @@ alt="Mihaela Koseva (Михаела Косева), Sofia University (Софий�
 
 <br><br>
 
-🤖 Machine Learning From Scratch
-Understanding Machine Learning by building the algorithms myself.
 
-Building ML algorithms from scratch to understand the math, logic, and intuition behind them — not just how to use a library.
 
-🧠 About
+# 🤖 Machine Learning Algorithms From Scratch
 
-<div align="left">
+<div align="center">
 
-This repository contains my implementations and experiments with fundamental Machine Learning algorithms.
+### 🧠 Learning Machine Learning by Building It
 
-The main goal is to understand how Machine Learning works under the hood by implementing the core ideas and mathematics behind different algorithms.
+A collection of Machine Learning algorithms implemented from scratch in Python.
 
-</div>
+<br>
 
-<div align="left">
-
-Instead of treating models as black boxes and simply using:
-
-model.fit(X, y)
-model.predict(X_test)
-
-I focus on understanding what happens behind the prediction — from distances and probabilities to gradients, entropy, loss functions, and decision boundaries.
+**KNN • Decision Tree • Logistic Regression • Naive Bayes • Linear Regression • Polynomial Regression • SVM**
 
 </div>
 
-📚 Algorithms
+---
 
-<table> <tr>
+## 📚 Algorithms
+
+<table>
+<tr>
 
 <td width="50%" valign="top">
 
-🔹 K-Nearest Neighbors
+## 🔵 K-Nearest Neighbors
 
-Concepts
+KNN classifies a new point based on the classes of its closest neighbors.
 
-Euclidean distance
-Nearest neighbors
-Majority voting
-Classification
+### Main idea
+
+```text
+New Point
+    ↓
+Calculate distances
+    ↓
+Find K nearest points
+    ↓
+Majority Voting
+    ↓
+Predicted Class
+```
+
+### Core implementation
+
+```python
 def euclidean_distance(a, b):
     return np.sqrt(
-        sum((a[i] - b[i]) ** 2
-            for i in range(len(a)))
+        sum([(a[i] - b[i])**2 for i in range(len(a))])
     )
-k_nearest = np.argsort(distances)[:k]
-labels = [y_train[i] for i in k_nearest]
+```
 
-prediction = Counter(
-    labels
-).most_common(1)[0][0]
+```python
+class KNN:
+    def __init__(self, k):
+        self.k = k
+
+    def fit(self, X, y):
+        self.X_train = X
+        self.y_train = y
+
+    def predict_class(self, new_point):
+        distances = [
+            euclidean_distance(point, new_point)
+            for point in self.X_train
+        ]
+
+        k_nearest_indices = np.argsort(distances)[:self.k]
+
+        k_nearest_labels = [
+            self.y_train[i]
+            for i in k_nearest_indices
+        ]
+
+        return Counter(
+            k_nearest_labels
+        ).most_common(1)[0][0]
+```
+
+**Concepts:** Euclidean Distance • Nearest Neighbors • Majority Voting
 
 </td>
 
 <td width="50%" valign="top">
 
-🌳 Decision Tree
+## 🌳 Decision Tree
 
-Concepts
+The Decision Tree recursively splits the dataset using the feature and threshold that provide the highest information gain.
 
-Entropy
-Information Gain
-Recursive splitting
-Decision nodes
-Leaf nodes
-information_gain = (
-    entropy(parent)
-    - left_weight * entropy(left)
-    - right_weight * entropy(right)
-)
-if feature_value <= threshold:
-    go_left()
-else:
-    go_right()
+### Main idea
+
+```text
+             Root
+              │
+        Best Feature?
+          /       \
+       Left       Right
+       /             \
+    Split            Split
+     / \              / \
+   Leaf Leaf        Leaf Leaf
+```
+
+### Information Gain
+
+```python
+def information_gain(self, parent_y, left_y, right_y):
+
+    left_weight = len(left_y) / len(parent_y)
+    right_weight = len(right_y) / len(parent_y)
+
+    return self.entropy(parent_y) - (
+        left_weight * self.entropy(left_y)
+        + right_weight * self.entropy(right_y)
+    )
+```
+
+### Entropy
+
+```python
+def entropy(self, y):
+    entropy = 0
+
+    class_labels = np.unique(y)
+
+    for class_label in class_labels:
+        p = len(y[y == class_label]) / len(y)
+        entropy -= p * np.log2(p)
+
+    return entropy
+```
+
+**Concepts:** Entropy • Information Gain • Recursive Splitting • Leaf Nodes
 
 </td>
 
@@ -269,38 +328,97 @@ else:
 
 <td width="50%" valign="top">
 
-📈 Logistic Regression
+## 📈 Logistic Regression
 
-Concepts
+Logistic Regression predicts the probability of belonging to a class using the sigmoid function.
 
-Sigmoid function
-Binary classification
-Cross-entropy loss
-Gradient descent
+### Sigmoid
+
+```python
 def sigmoid(z):
     return 1 / (1 + np.exp(-z))
-prediction = 1 if probability >= 0.5 else 0
+```
 
-The model learns parameters by minimizing the cost function using gradient descent.
+### Prediction
+
+```python
+def predict(X, w, b):
+
+    preds = np.zeros(len(X))
+
+    for i in range(len(X)):
+
+        z = np.dot(w, X[i]) + b
+        g = sigmoid(z)
+
+        preds[i] = 1 if g >= 0.5 else 0
+
+    return preds
+```
+
+### Gradient Descent
+
+```python
+w -= alpha * grad_w
+b -= alpha * grad_b
+```
+
+The model minimizes the **Binary Cross-Entropy Loss**.
+
+**Concepts:** Sigmoid • Cross-Entropy • Gradients • Gradient Descent
 
 </td>
 
 <td width="50%" valign="top">
 
-🎲 Naive Bayes
+## 🎲 Naive Bayes
 
-Concepts
+Naive Bayes predicts the class with the highest posterior probability.
 
-Prior probability
+### Main idea
+
+```text
+Prior Probability
+       ×
 Likelihood
-Posterior probability
-Gaussian distribution
-posterior = likelihood * prior
-prediction = classes[
+       ↓
+Posterior Probability
+       ↓
+Most Probable Class
+```
+
+### Gaussian Likelihood
+
+```python
+likelihood *= (
+    1 / (np.sqrt(2 * np.pi) * std)
+) * np.exp(
+    -((row[feature] - mean)**2)
+    / (2 * std**2)
+)
+```
+
+### Prediction
+
+```python
+posteriors = []
+
+for i in range(len(self.classes)):
+
+    likelihood = self.compute_likelihood(
+        row, i
+    )
+
+    posteriors.append(
+        likelihood * self.priors[i]
+    )
+
+prediction = self.classes[
     np.argmax(posteriors)
 ]
+```
 
-The implementation uses Gaussian likelihoods for continuous features.
+**Concepts:** Bayes' Theorem • Prior • Likelihood • Posterior • Gaussian Distribution
 
 </td>
 
@@ -310,48 +428,97 @@ The implementation uses Gaussian likelihoods for continuous features.
 
 <td width="50%" valign="top">
 
-📊 Linear Regression
+## 📏 Linear Regression
 
-Concepts
+Linear Regression models the relationship between input variables and a continuous target.
 
-Simple regression
-Multiple regression
-Coefficients
-Intercept
-Prediction
-R² score
+### Simple Linear Regression
+
+```text
+y = ax + b
+```
+
+### Multiple Linear Regression
+
+```text
+y = a₁x₁ + a₂x₂ + ... + b
+```
+
+### Implementation
+
+```python
 model = LinearRegression()
 
-model.fit(X_train, y_train)
+model.fit(
+    x.reshape(-1, 1),
+    y
+)
 
-predictions = model.predict(X_test)
+print(model.coef_)
+print(model.intercept_)
+```
 
-The goal is to find a line that best represents the relationship between the input features and the target.
+### Prediction
+
+```python
+y_pred = model.predict(
+    x.reshape(-1, 1)
+)
+```
+
+### Evaluation
+
+```python
+model.score(
+    x.reshape(-1, 1),
+    y
+)
+```
+
+The score represents the **R² coefficient of determination**.
 
 </td>
 
 <td width="50%" valign="top">
 
+## 🧮 Polynomial Regression
 
+Polynomial Regression allows a linear model to represent non-linear relationships.
 
+### Degree 2
 
-🧮 Polynomial Regression
+```text
+[1, x, x²]
+```
 
-Concepts
+### Implementation
 
-Polynomial features
-Non-linear relationships
-Feature transformation
-Degree
+```python
 poly = PolynomialFeatures(
     degree=2
 )
 
 X_poly = poly.fit_transform(X)
-model = LinearRegression()
-model.fit(X_poly, y)
 
-Polynomial regression allows linear regression to model non-linear patterns.
+lin = LinearRegression()
+
+lin.fit(
+    X_poly,
+    y
+)
+```
+
+For multiple variables, polynomial features can also include interactions:
+
+```text
+x₁²
+x₂²
+x₁x₂
+```
+
+This allows the model to represent curved relationships between variables.
+
+**Concepts:** Polynomial Features • Non-Linear Relationships • Feature Transformation
 
 </td>
 
@@ -361,79 +528,164 @@ Polynomial regression allows linear regression to model non-linear patterns.
 
 <td width="50%" valign="top">
 
-⚡ Support Vector Machine
+## ⚔️ Support Vector Machine
 
-Concepts
+SVM searches for a decision boundary with the **maximum margin** between classes.
 
-Maximum margin
-Support vectors
-Hinge loss
-L2 regularization
-Gradient descent
-condition = (
-    y * np.dot(x, w) - b >= 1
+### Main idea
+
+```text
+Class -1              Class +1
+
+ ● ● ●                 ▲ ▲ ▲
+ ● ● ●                 ▲ ▲ ▲
+      \               /
+       \    Margin   /
+        \           /
+         \         /
+          ─────────
+         Decision
+         Boundary
+```
+
+### Labels
+
+```python
+y_ = np.where(
+    y <= 0,
+    -1,
+    1
 )
+```
 
-The objective is to find a decision boundary with the largest possible margin between classes.
+### Margin Condition
+
+```python
+condition = (
+    y_[idx]
+    * (np.dot(x_i, self.W) - self.bias)
+    >= 1
+)
+```
+
+If the point is correctly classified and outside the margin, only the regularization term is updated.
+
+Otherwise, the hinge-loss gradient is applied.
+
+**Concepts:** Maximum Margin • Hinge Loss • Regularization • Gradient Descent
 
 </td>
 
 <td width="50%" valign="top">
 
-🔄 Machine Learning Workflow
+## 🔄 Common ML Workflow
 
-Most implementations follow the same basic pipeline:
+All algorithms follow a similar general workflow:
 
-Dataset
-   ↓
-Features & Target
-   ↓
-Train / Test Split
-   ↓
-Training
-   ↓
-Prediction
-   ↓
-Evaluation
+```text
+          Dataset
+             ↓
+      Split X and y
+             ↓
+      Train / Test Split
+             ↓
+        Train Model
+             ↓
+         Predict
+             ↓
+       Evaluate
+```
 
-This project focuses on understanding every step of this process.
+### Train / Test Split
+
+```python
+X_train, X_test, \
+y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2
+)
+```
+
+### Accuracy
+
+For classification models:
+
+```python
+accuracy = np.mean(
+    predictions == y_test
+) * 100
+
+print(accuracy)
+```
+
+This project focuses on understanding what happens **inside** the models instead of simply calling:
+
+```python
+model.fit(X, y)
+model.predict(X_test)
+```
 
 </td>
 
-</tr> </table>
+</tr>
+</table>
 
+---
 
-
-
-🎯 Classification vs Regression
-Type	Goal	Algorithms
-🟢 Classification	Predict a class	KNN, Decision Tree, Logistic Regression, Naive Bayes, SVM
-🔵 Regression	Predict a continuous value	Linear Regression, Polynomial Regression
-🧩 Core Concepts
-Concept	Purpose
-📏 Euclidean Distance	Measures distance between data points
-🌳 Entropy	Measures impurity in a dataset
-📈 Information Gain	Determines the best tree split
-🔢 Sigmoid	Converts values into probabilities
-🎲 Bayes Theorem	Calculates posterior probabilities
-📉 Gradient Descent	Optimizes model parameters
-⚖️ Regularization	Helps reduce overfitting
-📐 Margin	Determines the SVM decision boundary
-🔄 Feature Transformation	Creates polynomial features
-🛠️ Tech Stack
+# 🧠 Concepts Covered
 
 <div align="center">
 
-
-
-
-<br><br>
-
-
+| 📐 Mathematics     | 🤖 Machine Learning   | 🛠️ Tools    |
+| ------------------ | --------------------- | ------------ |
+| Euclidean Distance | KNN                   | NumPy        |
+| Entropy            | Decision Tree         | Pandas       |
+| Information Gain   | Naive Bayes           | Matplotlib   |
+| Probability        | Logistic Regression   | Scikit-learn |
+| Derivatives        | SVM                   | Python       |
+| Gradient Descent   | Linear Regression     |              |
+| Regularization     | Polynomial Regression |              |
 
 </div>
 
-📁 Project Structure
+---
+
+# ⚖️ Classification vs Regression
+
+```text
+                 Machine Learning
+                       │
+             ┌─────────┴─────────┐
+             │                   │
+      Classification         Regression
+             │                   │
+      ┌──────┼──────┐       ┌────┴────┐
+      │      │      │       │         │
+     KNN    Tree   SVM    Linear   Polynomial
+      │      │      │     Regression Regression
+      │      │      │
+ Logistic  Naive
+ Regression Bayes
+```
+
+---
+
+# 🛠️ Technologies
+
+```text
+Python
+ ├── NumPy
+ ├── Pandas
+ ├── Matplotlib
+ └── Scikit-learn
+```
+
+---
+
+# 📂 Project Structure
+
+```text
 machine-learning/
 │
 ├── data/
@@ -448,56 +700,87 @@ machine-learning/
 ├── svm.py
 │
 └── README.md
+```
 
+---
 
-<br><br>
+# 🎯 Project Goal
 
+The goal is simple:
 
+> **Don't just use Machine Learning. Understand it.**
 
-🚀 Why This Project?
+Instead of treating ML algorithms as black boxes, this project breaks them down into their fundamental mathematical and algorithmic components.
 
-Machine Learning becomes much easier to understand when you stop treating algorithms as black boxes.
+From calculating the distance between two points...
 
-This project is about learning how and why the algorithms work.
+```text
+KNN
+ ↓
+Distance
+```
 
-Understand the Math
-        ↓
-Understand the Algorithm
-        ↓
-Implement It
-        ↓
-Test It
-        ↓
-Understand the Model
-🔮 Future Improvements
+to finding the best split...
 
-Add model evaluation metrics
+```text
+Decision Tree
+ ↓
+Entropy
+ ↓
+Information Gain
+```
 
-Add confusion matrices
+to optimizing weights...
 
-Visualize decision boundaries
+```text
+Logistic Regression
+ ↓
+Gradient
+ ↓
+Gradient Descent
+```
 
-Add more algorithms
+and maximizing the margin...
 
-Improve implementations and documentation
+```text
+SVM
+ ↓
+Hinge Loss
+ ↓
+Maximum Margin
+```
 
-Compare from-scratch implementations with Scikit-learn
+the goal is to understand **why the algorithms work**, not only how to call them.
 
-Add mathematical explanations
+---
 
-Add datasets and experiments
+# 🚀 Future Improvements
 
+* [ ] Feature Scaling
+* [ ] Confusion Matrix
+* [ ] Precision / Recall / F1 Score
+* [ ] Cross-Validation
+* [ ] Hyperparameter Tuning
+* [ ] Better Visualizations
+* [ ] Compare From-Scratch vs Scikit-learn
+* [ ] More Datasets
+* [ ] Model Performance Comparison
+* [ ] More Machine Learning Algorithms
 
-
-<br><br>
-
-
+---
 
 <div align="center">
 
-🧠 Don't just use Machine Learning. Understand it.
+### ⭐ Built to learn. Built to understand. Built from scratch.
 
-Learn the math. Build the algorithm. Understand the model.
+**Machine Learning — one algorithm at a time. 🚀**
+
+</div>
+
+
+</div>
+</div>
+
 
 
 
