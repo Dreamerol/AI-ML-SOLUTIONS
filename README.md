@@ -190,8 +190,6 @@ alt="Mihaela Koseva (Михаела Косева), Sofia University (Софий�
 
 # 🤖 Machine Learning Algorithms From Scratch
 
-<div align="center">
-
 ### 🧠 Learning Machine Learning by Building It
 
 A collection of Machine Learning algorithms implemented from scratch in Python.
@@ -200,7 +198,7 @@ A collection of Machine Learning algorithms implemented from scratch in Python.
 
 **KNN • Decision Tree • Logistic Regression • Naive Bayes • Linear Regression • Polynomial Regression • SVM**
 
-</div>
+
 
 ---
 
