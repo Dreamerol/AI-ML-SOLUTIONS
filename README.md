@@ -778,10 +778,10 @@ the goal is to understand **why the algorithms work**, not only how to call them
 
 **Machine Learning — one algorithm at a time. 🚀**
 
-
-
-
 </div>
+
+
+
 
 </div>
 
@@ -795,7 +795,7 @@ the goal is to understand **why the algorithms work**, not only how to call them
 
 
 
-<br><br><br>
+<br><br>
 
 
 
