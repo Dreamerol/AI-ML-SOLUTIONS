@@ -193,6 +193,379 @@ alt="Mihaela Koseva (Михаела Косева), Sofia University (Софий�
 
 
 
+# 🤖 Machine Learning From Scratch
+
+<div align="center">
+
+### Understanding Machine Learning by building the algorithms myself.
+
+Building ML algorithms from scratch to understand the **math, logic, and intuition** behind them — not just how to use a library.
+
+</div>
+
+---
+
+## 🧠 About
+
+<div align="left">
+
+This repository contains my implementations and experiments with fundamental **Machine Learning algorithms**.
+
+The main goal is to understand how Machine Learning works **under the hood** by implementing the core ideas and mathematics behind different algorithms.
+
+</div>
+
+<div align="left">
+
+Instead of treating models as black boxes and simply using:
+
+```python
+model.fit(X, y)
+model.predict(X_test)
+```
+
+I focus on understanding what happens behind the prediction — from **distances and probabilities** to **gradients, entropy, loss functions, and decision boundaries**.
+
+</div>
+
+---
+
+## 📚 Algorithms
+
+<table>
+<tr>
+
+<td width="50%" valign="top">
+
+### 🔹 K-Nearest Neighbors
+
+**Concepts**
+
+* Euclidean distance
+* Nearest neighbors
+* Majority voting
+* Classification
+
+```python
+def euclidean_distance(a, b):
+    return np.sqrt(
+        sum((a[i] - b[i]) ** 2
+            for i in range(len(a)))
+    )
+```
+
+```python
+k_nearest = np.argsort(distances)[:k]
+labels = y_train[k_nearest]
+
+prediction = Counter(
+    labels
+).most_common(1)[0][0]
+```
+
+</td>
+
+<td width="50%" valign="top">
+
+### 🌳 Decision Tree
+
+**Concepts**
+
+* Entropy
+* Information Gain
+* Recursive splitting
+* Decision nodes
+* Leaf nodes
+
+```python
+information_gain = (
+    entropy(parent)
+    - left_weight * entropy(left)
+    - right_weight * entropy(right)
+)
+```
+
+```python
+if feature_value <= threshold:
+    go_left()
+else:
+    go_right()
+```
+
+</td>
+
+</tr>
+
+<tr>
+
+<td width="50%" valign="top">
+
+### 📈 Logistic Regression
+
+**Concepts**
+
+* Sigmoid function
+* Binary classification
+* Cross-entropy loss
+* Gradient descent
+
+```python
+def sigmoid(z):
+    return 1 / (1 + np.exp(-z))
+```
+
+```python
+prediction = 1 if probability >= 0.5 else 0
+```
+
+The model learns parameters by minimizing the **cost function** using gradient descent.
+
+</td>
+
+<td width="50%" valign="top">
+
+### 🎲 Naive Bayes
+
+**Concepts**
+
+* Prior probability
+* Likelihood
+* Posterior probability
+* Gaussian distribution
+
+```python
+posterior = (
+    likelihood * prior
+)
+```
+
+```python
+prediction = classes[
+    np.argmax(posteriors)
+]
+```
+
+The implementation uses **Gaussian likelihoods** for continuous features.
+
+</td>
+
+</tr>
+
+<tr>
+
+<td width="50%" valign="top">
+
+### 📊 Linear Regression
+
+**Concepts**
+
+* Simple regression
+* Multiple regression
+* Coefficients
+* Intercept
+* Prediction
+* R² score
+
+```python
+model = LinearRegression()
+
+model.fit(X, y)
+
+predictions = model.predict(X)
+```
+
+The goal is to find a line that best represents the relationship between the input features and the target.
+
+</td>
+
+<td width="50%" valign="top">
+
+### 🧮 Polynomial Regression
+
+**Concepts**
+
+* Polynomial features
+* Non-linear relationships
+* Feature transformation
+* Degree
+
+```python
+poly = PolynomialFeatures(
+    degree=2
+)
+
+X_poly = poly.fit_transform(X)
+```
+
+```python
+model = LinearRegression()
+model.fit(X_poly, y)
+```
+
+Polynomial regression allows linear regression to model **non-linear patterns**.
+
+</td>
+
+</tr>
+
+<tr>
+
+<td width="50%" valign="top">
+
+### ⚡ Support Vector Machine
+
+**Concepts**
+
+* Maximum margin
+* Support vectors
+* Hinge loss
+* L2 regularization
+* Gradient descent
+
+```python
+condition = (
+    y * np.dot(x, w) - b >= 1
+)
+```
+
+The objective is to find a decision boundary with the **largest possible margin** between classes.
+
+</td>
+
+<td width="50%" valign="top">
+
+### 🔄 Machine Learning Workflow
+
+Most implementations follow the same basic pipeline:
+
+```text
+Dataset
+   ↓
+Features & Target
+   ↓
+Train / Test Split
+   ↓
+Training
+   ↓
+Prediction
+   ↓
+Evaluation
+```
+
+This project focuses on understanding every step of this process.
+
+</td>
+
+</tr>
+</table>
+
+---
+
+## 🎯 Classification vs Regression
+
+| Type              | Goal                       | Algorithms                                                |
+| ----------------- | -------------------------- | --------------------------------------------------------- |
+| 🟢 Classification | Predict a class            | KNN, Decision Tree, Logistic Regression, Naive Bayes, SVM |
+| 🔵 Regression     | Predict a continuous value | Linear Regression, Polynomial Regression                  |
+
+---
+
+## 🧩 Core Concepts
+
+| Concept                   | Purpose                               |
+| ------------------------- | ------------------------------------- |
+| 📏 Euclidean Distance     | Measures distance between data points |
+| 🌳 Entropy                | Measures impurity in a dataset        |
+| 📈 Information Gain       | Determines the best tree split        |
+| 🔢 Sigmoid                | Converts values into probabilities    |
+| 🎲 Bayes Theorem          | Calculates posterior probabilities    |
+| 📉 Gradient Descent       | Optimizes model parameters            |
+| ⚖️ Regularization         | Helps reduce overfitting              |
+| 📐 Margin                 | Determines the SVM decision boundary  |
+| 🔄 Feature Transformation | Creates polynomial features           |
+
+---
+
+## 🛠️ Tech Stack
+
+<div align="center">
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge\&logo=python\&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge\&logo=numpy\&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge\&logo=pandas\&logoColor=white)
+![Scikit Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=for-the-badge\&logo=scikit-learn\&logoColor=white)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge\&logo=plotly\&logoColor=white)
+
+</div>
+
+---
+
+## 📁 Project Structure
+
+```text
+machine-learning/
+│
+├── data/
+│   └── data.csv
+│
+├── knn.py
+├── decision_tree.py
+├── logistic_regression.py
+├── naive_bayes.py
+├── linear_regression.py
+├── polynomial_regression.py
+├── svm.py
+│
+└── README.md
+```
+
+---
+
+## 🚀 Why This Project?
+
+Machine Learning becomes much easier to understand when you stop treating algorithms as black boxes.
+
+This project is about learning **how and why** the algorithms work.
+
+```text
+Understand the Math
+        ↓
+Understand the Algorithm
+        ↓
+Implement It
+        ↓
+Test It
+        ↓
+Understand the Model
+```
+
+---
+
+## 🔮 Future Improvements
+
+* [ ] Add model evaluation metrics
+* [ ] Add confusion matrices
+* [ ] Visualize decision boundaries
+* [ ] Add more algorithms
+* [ ] Improve implementations and documentation
+* [ ] Compare from-scratch implementations with Scikit-learn
+* [ ] Add mathematical explanations
+* [ ] Add datasets and experiments
+
+---
+
+<div align="center">
+
+### 🧠 Don't just use Machine Learning. Understand it.
+
+**Learn the math. Build the algorithm. Understand the model.**
+
+
+
+
+</div>
+
+</div>
 
 
 
@@ -203,14 +576,7 @@ alt="Mihaela Koseva (Михаела Косева), Sofia University (Софий�
 
 
 
-<h2 align="center">⭐ Explore repos & star what you find interesting.</h2>
-
-
-
-
-
-
-
+<h2 align="center">⭐ Explore repos & star what you find interesting</h2>
 
 
 
