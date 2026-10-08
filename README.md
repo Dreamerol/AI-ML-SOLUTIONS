@@ -197,13 +197,10 @@ alt="Mihaela Koseva (Михаела Косева), Sofia University (Софий�
 
 # 🤖 Machine Learning From Scratch
 
-<div align="center">
-
 ### Understanding Machine Learning by building the algorithms myself.
 
 Building ML algorithms from scratch to understand the **math, logic, and intuition** behind them — not just how to use a library.
 
-</div>
 
 ---
 
@@ -563,7 +560,7 @@ Understand the Model
 **Learn the math. Build the algorithm. Understand the model.**
 
 
-
+</div>
 
 </div>
 
