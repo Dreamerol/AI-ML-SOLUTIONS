@@ -784,7 +784,7 @@ the goal is to understand **why the algorithms work**, not only how to call them
 
 
 
-<br><br>
+<br>
 
 
 ---
