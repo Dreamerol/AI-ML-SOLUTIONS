@@ -783,17 +783,15 @@ the goal is to understand **why the algorithms work**, not only how to call them
 * [ ] More Machine Learning Algorithms
 
 
-
-<br>
-
-
 ---
+
 
 <div align="center">
 
+
 ### ⭐ Built to learn. Built to understand. Built from scratch.
 
-**Machine Learning — one algorithm at a time. 🚀**
+**Machine Learning — one algorithm at a time. **
 
 </div>
 
