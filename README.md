@@ -194,7 +194,9 @@ alt="Mihaela Koseva (Михаела Косева), Sofia University (Софий�
 
 <div align="left">
 
-<br><br>
+
+
+<br>
 
 
 
